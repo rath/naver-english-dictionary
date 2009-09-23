@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="asd" default="build">
+
+    <property name="src" value="src"/>
+    <property name="build" value="bin"/>
+
+    <path id="classpath">
+        <fileset dir="/Users/rath/work/me2googlereader/lib">
+            <include name="*.jar" />
+        </fileset>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="${build}" />
+        <javac srcdir="${src}" destdir="${build}"
+            debug="yes"
+            source="1.5"
+            target="1.5"
+            encoding="UTF-8">
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+
+    <target name="build" depends="compile">
+        <copy todir="${build}">
+            <fileset dir="${src}" includes="**/*.gif" />
+        </copy>
+        <jar destfile="naver-dic.jar" basedir="${build}" compress="yes" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+
+</project>
